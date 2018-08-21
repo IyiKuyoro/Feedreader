@@ -25,10 +25,6 @@ At the bottom of the page is a jasmine spec runner.
   * jQuery: Used for DOM manipulation
   * Jasmine: All tests were written with the jasmine test framework
 
-# Authors
-  * *Heidi Kasemir* :woman: - [GitHub](https://github.com/hkasemir)
-  * *Opeoluwa Iyi-Kuyoro* :man: - [Portfolio](https://iyikuyoro.github.io/My-Portfolio/)
-
 # Collaboration
 I am currently not accepting requests to collaborate on this project, however, your feedback is most welcome.
 
