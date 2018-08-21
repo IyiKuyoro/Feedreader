@@ -27,46 +27,110 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* A test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+        it('feeds url are not empty', function() {
+            allFeeds.forEach(function(feed){
+                expect(feed.url).toBeDefined();
+                expect(feed.url).not.toBe('');
+            });
+        });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* A test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+        it('feeds names are not empty', function() {
+            allFeeds.forEach(function(feed){
+                expect(feed.name).toBeDefined();
+                expect(feed.name).not.toBe('');
+            });
+        });
     });
 
-
-    /* TODO: Write a new test suite named "The menu" */
-
-        /* TODO: Write a test that ensures the menu element is
+    describe('The menu', function() {
+        /* A test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+        it('menu element is hidden', function(){
+            var body = document.getElementsByTagName('body')[0];
 
-         /* TODO: Write a test that ensures the menu changes
+            expect(body.className).toBe('menu-hidden');
+        });
+
+         /* A test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+        it('menu can show and hide', function(){
+            // Collect all dome elements to be used
+            var menuIcon = $('.menu-icon-link');
+            var body = $('body')[0];
+            
+            // Trigger the click event
+            menuIcon.trigger('click');
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+            // Check if menu is displayed
+            expect(body.className).toBe('');
 
-        /* TODO: Write a test that ensures when the loadFeed
+            // Trigger the click event again
+            menuIcon.trigger('click');
+
+            // Check if menu is hidden
+            expect(body.className).toBe('menu-hidden');
+        });
+    });
+
+    describe('Initial Entries', function(){
+        /* A test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        beforeEach(function(done){
+            loadFeed(0, done);
+        });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+        it('load feed generates entries', function(){
+            var feed = $('.feed');
+            var entries = feed.find('.entry');
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+            expect(entries.length).not.toBe(0);
+        });
+    });
+
+    describe('New Feed Selection', function(){
+        var previousEntries;
+
+        // save previous entries and load new ones
+        beforeEach(function(done){
+            // Get the previous first entry;
+            previousEntries = $('.feed').find('.entry');
+            loadFeed(1, done);
+        });
+
+        /* A test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        it('load a different feed', function(){
+            var currentEntries = $('.feed').find('.entry');
+
+            try {
+                // Loop over each new entry, and compare with previous entries
+                for (i = 0; i < currentEntries.length; i++) {
+                    expect(currentEntries[i]).not.toBe(previousEntries[i]);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        });
+    })
 }());
