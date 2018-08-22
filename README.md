@@ -3,11 +3,7 @@
 Feedreader is an RSS that displays feeds from *Udacity Blog*, *CSS Tricks*, *HTML5 Rocks* and *Linear Digressions*. The purpose of this application is to practice writing jasmine tests for a front-end web application.
 
 # Getting Started
-You can view the live page :point_right: [Here](https://iyikuyoro.github.io/Feedreader/Feedreader/index.html).
-
-Or 
-
-You can have a local copy by downloading the zipped folder. To play the game locally:
+You can have a local copy by downloading the zipped folder:
   1) Unpack the files on your local machine
   2) Ensure that all the unpacked files are located in one folder
   3) Locate the `index.html` file and launch it with any browser
@@ -24,10 +20,6 @@ At the bottom of the page is a jasmine spec runner.
   * JavaScript: Used in implementing all game logic and DOM manipulation
   * jQuery: Used for DOM manipulation
   * Jasmine: All tests were written with the jasmine test framework
-
-# Authors
-  * *Heidi Kasemir* :woman: - [GitHub](https://github.com/hkasemir)
-  * *Opeoluwa Iyi-Kuyoro* :man: - [Portfolio](https://iyikuyoro.github.io/My-Portfolio/)
 
 # Collaboration
 I am currently not accepting requests to collaborate on this project, however, your feedback is most welcome.
