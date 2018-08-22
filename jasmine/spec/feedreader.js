@@ -58,9 +58,9 @@ $(function() {
          * hiding/showing of the menu element.
          */
         it('menu element is hidden', function(){
-            var body = document.getElementsByTagName('body')[0];
+            var body = $('body');
 
-            expect(body.className).toBe('menu-hidden');
+            expect(body.hasClass('menu-hidden')).toBe(true);
         });
 
          /* A test that ensures the menu changes
@@ -71,19 +71,19 @@ $(function() {
         it('menu can show and hide', function(){
             // Collect all dome elements to be used
             var menuIcon = $('.menu-icon-link');
-            var body = $('body')[0];
+            var body = $('body');
             
             // Trigger the click event
             menuIcon.trigger('click');
 
             // Check if menu is displayed
-            expect(body.className).toBe('');
+            expect(body.hasClass('menu-hidden')).toBe(false);
 
             // Trigger the click event again
             menuIcon.trigger('click');
 
             // Check if menu is hidden
-            expect(body.className).toBe('menu-hidden');
+            expect(body.hasClass('menu-hidden')).toBe(true);
         });
     });
 
@@ -102,18 +102,24 @@ $(function() {
             var feed = $('.feed');
             var entries = feed.find('.entry');
 
-            expect(entries.length).not.toBe(0);
+            expect(entries.length).toBeGreaterThan(0);
         });
     });
 
     describe('New Feed Selection', function(){
         var previousEntries;
+        var newEntries;
 
         // save previous entries and load new ones
         beforeEach(function(done){
             // Get the previous first entry;
-            previousEntries = $('.feed').find('.entry');
-            loadFeed(1, done);
+            loadFeed(0, function(){
+                previousEntries = $('.feed').find('.entry');
+                loadFeed(1, function(){
+                    newEntries = $('.feed').find('.entry');
+                    done();
+                });
+            });
         });
 
         /* A test that ensures when a new feed is loaded
@@ -121,12 +127,10 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         it('load a different feed', function(){
-            var currentEntries = $('.feed').find('.entry');
-
             try {
                 // Loop over each new entry, and compare with previous entries
-                for (i = 0; i < currentEntries.length; i++) {
-                    expect(currentEntries[i]).not.toBe(previousEntries[i]);
+                for (i = 0; i < newEntries.length; i++) {
+                    expect(newEntries[i]).not.toBe(previousEntries[i]);
                 }
             } catch (e) {
                 console.log(e);
