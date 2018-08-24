@@ -114,9 +114,9 @@ $(function() {
         beforeEach(function(done){
             // Get the previous first entry;
             loadFeed(0, function(){
-                previousEntries = $('.feed').find('.entry');
+                previousEntries = $('.feed').html();
                 loadFeed(1, function(){
-                    newEntries = $('.feed').find('.entry');
+                    newEntries = $('.feed').html();
                     done();
                 });
             });
@@ -127,14 +127,8 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         it('load a different feed', function(){
-            try {
-                // Loop over each new entry, and compare with previous entries
-                for (i = 0; i < newEntries.length; i++) {
-                    expect(newEntries[i]).not.toBe(previousEntries[i]);
-                }
-            } catch (e) {
-                console.log(e);
-            }
+            // Compare the HTML of both feeds.
+            expect(newEntries).not.toBe(previousEntries);
         });
     })
 }());
